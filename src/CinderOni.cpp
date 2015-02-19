@@ -320,6 +320,13 @@ OniCapture::OniCapture( const char *deviceUri, const Options &options )
 {
 	mDeviceRef = std::shared_ptr< openni::Device >( new openni::Device() );
 
+	init( deviceUri, options );
+}
+
+void OniCapture::init( const char *deviceUri, const Options &options )
+{
+	deinit();
+
 	openni::Status rc;
 	rc = mDeviceRef->open( deviceUri );
 	if ( rc != openni::STATUS_OK )
@@ -352,6 +359,11 @@ OniCapture::OniCapture( const char *deviceUri, const Options &options )
 }
 
 OniCapture::~OniCapture()
+{
+	deinit();
+}
+
+void OniCapture::deinit()
 {
 	stop();
 

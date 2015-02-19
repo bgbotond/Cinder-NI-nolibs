@@ -123,6 +123,7 @@ class OniCapture
 		else return std::shared_ptr< openni::VideoStream >();
 	}
 
+	void init( const char *deviceUri, const Options &options = Options() );
 	void start();
 	void stop();
 
@@ -149,6 +150,7 @@ class OniCapture
 
  protected:
 	OniCapture( const char *deviceUri, const Options &options );
+	void deinit();
 
 	struct DepthListener : public openni::VideoStream::NewFrameListener, public BufferObj
 	{
